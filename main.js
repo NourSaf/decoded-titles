@@ -1,5 +1,5 @@
 
-let myJson = "dataTarget.json";
+let myJson = "./dataTarget.json";
 let historical_context = [
   "medieval", "renaissance", "colonial", "industrial revolution", "enlightenment", "modern", "early american", 
   "ancient", "victorian", "georgian", "middle ages", "classical", "age of reason", "imperial age", "byzantine", 
