@@ -122,8 +122,8 @@ const dataPromise = fetchData(myJson)
     const div = document.createElement('div');
     div.className = 'sub-div-text x1';
     div.id = 'sub-div-text'
-    div.style.fontSize = '0.6em';
-    div.style.padding = "0.5em"
+    div.style.fontSize = '0.5em';
+    div.style.padding = "0.4em"
 
     let lowerCaseName = name.toLowerCase();
     let tokens = lowerCaseName.split(' ');
