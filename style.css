@@ -166,7 +166,7 @@ body {
 
 
 
-.gender, .historical, .political, .notHighlight{
+.gender, .historical, .political, .notHighlight, .social{
   pointer-events:none;
 }
 
