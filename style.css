@@ -165,6 +165,11 @@ body {
 }
 
 
+
+.gender, .historical, .political, .notHighlight{
+  pointer-events:none;
+}
+
 button{
   font-family: "Space Mono", "DM Sans", sans-serif;
   font-size: 0.6em;

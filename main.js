@@ -50,7 +50,7 @@ async function fetchData(url) {
       throw new Error(`Network response was not ok (status ${response.status})`);
     }
     const data = await response.json(myJson);   
-    return data.slice(0, 10000);
+    return data.slice(0, 502);
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error; 
@@ -90,34 +90,19 @@ const dataPromise = fetchData(myJson)
   let btns = document.createElement('div')
   btns.id = 'allBtnContainer'
   btns.className = "allBtns"
-  // btns.style.display = "flex"
   btnContainer.node().appendChild(btns);
 
   const mainContainer = app.append('div').attr('class', 'main-viz-container');
   let subContainer = document.createElement('div');
-  subContainer.className = 'sub-container x1';
+  subContainer.className = 'sub-container x1';   
   
   // Loop through data and return only the name property
   const names = data.map(item => item.name);
   const type = data.map(item => item.objectType);
-  console.log("Names:",  names);
+  console.log("–––––––>> Thos are Names:",  names);
   console.log("type:",  type);
 
-  const tokenizedNames = names.map(name => name.split(' '));
-  console.log("This is Tokenized Names",tokenizedNames)
-
-    // Add click event listener to sub-div-text elements
-    const containerPopup = document.querySelector('.main-viz-container');
-    containerPopup.addEventListener('click', (event) => {
-      if (/x/.test(event.target.className)) {
-        const popUpdiv = document.createElement('div');
-        popUpdiv.classList = "popUpDiv";
-        popUpdiv.textContent = event.target.textContent; // Assign the clicked div content
-        containerPopup.appendChild(popUpdiv);
-        console.log("hi you clicked me");
-      }
-    })
-
+  
   names.forEach((name, index) => {
     const div = document.createElement('div');
     div.className = 'sub-div-text x1';
@@ -137,7 +122,7 @@ const dataPromise = fetchData(myJson)
       subContainer.className = 'sub-container x1';
       //console.log("----->>> INDEX",index)
     }
-    
+
     tokens.forEach(token => { 
       const span = document.createElement('span');
       if (historical_context.some(w => token.toLowerCase() === w.toLowerCase())) {
@@ -158,13 +143,26 @@ const dataPromise = fetchData(myJson)
         span.classList.add('gender');
       } else {
         span.textContent = token;
-        span.classList.add('notHighlight-x1');
+        span.classList.add('notHighlight');
       }
       div.appendChild(span);
       div.appendChild(document.createTextNode(' ')); // Add space between words
-    });;
+    });
+
+    //creates a new div when clicked
+    const main_div_cont = document.querySelector('.main-viz-container');
+    main_div_cont.addEventListener('click', (event) => {
+      if (event.target.className) {
+        const popUpdiv = document.createElement('div');
+        popUpdiv.classList = "popUpDiv";
+        popUpdiv.textContent = event.target.textContent; // Assign the clicked div content
+        main_div_cont.appendChild(popUpdiv);
+        console.log("hi you clicked me");
+      }
+    })
+
   }); 
-  
+
     function createButton(category, color, className) {
         const button = document.createElement('button');
         button.textContent = `${category}`;
@@ -232,11 +230,10 @@ const dataPromise = fetchData(myJson)
         });
         return button;
       }
-
       if (btns) {
         const buttonContainer = d3.select(btns).append('div').attr('class', 'button-container');
         const subButtonContainer = d3.select(btns).append('div').attr('class', 'subButton-container');
-        subButtonContainer.node().appendChild(createIvisitageBtn('Invisitage', `${invisitageColor}`, 'notHighlight-x1'));
+        subButtonContainer.node().appendChild(createIvisitageBtn('Invisitage', `${invisitageColor}`, 'notHighlight'));
         buttonContainer.node().appendChild(createButton('Politics', `${politicColor}`, 'political'));
         buttonContainer.node().appendChild(createButton('Gender', `${genderColor}`, 'gender'));
         buttonContainer.node().appendChild(createButton('Social', `${socialColor}`, 'social'));
