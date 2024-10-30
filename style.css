@@ -166,9 +166,6 @@ body {
 
 
 
-.gender, .historical, .political, .notHighlight, .social{
-  pointer-events:none;
-}
 
 button{
   font-family: "Space Mono", "DM Sans", sans-serif;
@@ -194,10 +191,8 @@ button :hover{
 
 .popUpDiv{
   display: flex;
-  position: fixed;
-  top: 10px;
-  right: 10px;
+  padding-left: 10px;
   height: auto;
   width: auto;
-  background-color: red;
+  font-size: .8em;
 }

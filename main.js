@@ -50,7 +50,7 @@ async function fetchData(url) {
       throw new Error(`Network response was not ok (status ${response.status})`);
     }
     const data = await response.json(myJson);   
-    return data.slice(0, 502);
+    return data.slice(0, 100);
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error; 
@@ -76,6 +76,9 @@ const genderColor = "rgb(187, 255, 97)";
 const socialColor = "rgb(247, 192, 96)";
 const invisitageColor = "rgb(255, 255, 255)";
 
+
+
+
 const dataPromise = fetchData(myJson)
   .then(data => {
   hideLoading();
@@ -94,7 +97,9 @@ const dataPromise = fetchData(myJson)
 
   const mainContainer = app.append('div').attr('class', 'main-viz-container');
   let subContainer = document.createElement('div');
-  subContainer.className = 'sub-container x1';   
+  subContainer.className = 'sub-container x1';
+
+
   
   // Loop through data and return only the name property
   const names = data.map(item => item.name);
@@ -109,6 +114,22 @@ const dataPromise = fetchData(myJson)
     div.id = 'sub-div-text'
     div.style.fontSize = '0.5em';
     div.style.padding = "0.4em"
+
+      div.addEventListener('mouseover', () => {
+        const titel_div = document.createElement('div');
+        titel_div.className = 'popUpDiv';
+        titel_div.textContent = name;
+        const menu_div = document.querySelector('.menu-left');
+        menu_div.append(titel_div);
+        console.log('HI you iiiiiii');
+      });
+
+      div.addEventListener('mouseout', () => {
+        const titel_div = document.querySelector('.popUpDiv');
+        if (titel_div) {
+          titel_div.remove();
+        }
+      });
 
     let lowerCaseName = name.toLowerCase();
     let tokens = lowerCaseName.split(' ');
@@ -146,22 +167,12 @@ const dataPromise = fetchData(myJson)
         span.classList.add('notHighlight');
       }
       div.appendChild(span);
-      div.appendChild(document.createTextNode(' ')); // Add space between words
+      div.appendChild(document.createTextNode(' '));
     });
 
-    //creates a new div when clicked
-    const main_div_cont = document.querySelector('.main-viz-container');
-    main_div_cont.addEventListener('click', (event) => {
-      if (event.target.className) {
-        const popUpdiv = document.createElement('div');
-        popUpdiv.classList = "popUpDiv";
-        popUpdiv.textContent = event.target.textContent; // Assign the clicked div content
-        main_div_cont.appendChild(popUpdiv);
-        console.log("hi you clicked me");
-      }
-    })
-
   }); 
+
+
 
     function createButton(category, color, className) {
         const button = document.createElement('button');
@@ -242,6 +253,7 @@ const dataPromise = fetchData(myJson)
         console.error('Element with ID "butnContainer" not found.');
       }
 
+      
   let historicalCount = 0;
   let politicalCount = 0;
   let socialCount = 0;
@@ -342,6 +354,8 @@ const dataPromise = fetchData(myJson)
 
   countWords(data);
 
+ 
+
   // Append the last sub-container if it has any children
   if (subContainer.children.length > 0) {
     fragment.appendChild(subContainer);
@@ -353,3 +367,9 @@ const dataPromise = fetchData(myJson)
   console.error('Error:', error);
 });
 
+
+  
+
+ 
+  
+  
