@@ -134,7 +134,7 @@ async function fetchData(url) {
       throw new Error(`Network response was not ok (status ${response.status})`);
     }
     const data = await response.json(myJson);   
-    return data.slice(0, 10000);
+    return data.slice(0, 30000);
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error; 
