@@ -145,8 +145,8 @@ body {
 }
 
 .sub-container :hover{
-  background: rgb(217, 217, 217);
-  color: black;
+  background: rgb(100, 100, 100);
+  color: rgb(255, 255, 255);
 }
 
 .sec-viz-container{

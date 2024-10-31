@@ -1,127 +1,100 @@
-// const { toArray } = require("@amcharts/amcharts5/.internal/core/util/Array");
 
 let myJson = "./dataTarget.json";
 
 
-
+let historical_context = [
+  "medieval", "renaissance", "colonial", "industrial revolution", "enlightenment", "modern", "early american", 
+  "ancient", "victorian", "georgian", "middle ages", "classical", "age of reason", "imperial age", "byzantine", 
+  "dark ages", "feudal", "early modern", "pre-colonial", "civil war", "revolution", "independence", "world war", 
+  "exploration", "discovery", "treaty", "invasion", "conquest", "crusades", "expansion", "plague", "rebellion", 
+  "uprising", "colonization", "industrialization", "migration", "diaspora", "abolition", "enfranchisement", 
+  "capitalism", "trade", "commerce", "markets", "wealth", "industry", "labor", "business", "free market", 
+  "enterprise", "merchant", "economy", "globalization", "corporation", "investment", "monopoly", "competition", 
+  "currency", "stocks", "venture", "profit", "supply", "demand", "market forces", "inflation", "commodities", 
+  "imperialism", "decolonization", "nationalism", "suffrage", "socialism", "communism", "feminism", "civil rights", 
+  "indigenous rights", "environmentalism", "human rights", "genocide", "apartheid", "slavery", "emancipation", 
+  "feudalism", "serfdom", "chivalry", "enlightenment philosophy", "scientific revolution", "romanticism", "reformation", 
+  "counter-reformation", "cold war", "space race", "age of exploration", "mercantilism", "guilds", "agrarian society", 
+  "urbanization", "consumerism", "modernism", "postmodernism", "information age", "digital revolution", "cybersecurity", 
+  "biotechnology", "industrial decline", "sustainability", "global crises", "pandemics", "climate change", "nuclear age", 
+  "democracy", "republic", "monarchy", "dictatorship", "feudal society", "dynasty", "empire", "scientific discovery", 
+  "railroad expansion", "telecommunications", "internet revolution", "privacy", "transparency", "social justice"
+];
 
 let politics = [
-  "monarchy", "republic", "democracy", "dictatorship", "fascism", "anarchy", "oligarchy", 
+  "monarchy", "republic", "democracy", "socialism", "communism", "dictatorship", "fascism", "anarchy", "oligarchy", 
   "parliament", "totalitarianism", "federalism", "theocracy", "autocracy", "liberalism", "conservatism", "feudalism", 
-  "authoritarianism", "tyranny", "plutocracy", "rebellion", "revolt", 
-  "resistance",  "change", "rights", "revolution", "independence", "self-determination",  
+  "authoritarianism", "tyranny", "plutocracy", "liberty", "freedom", "justice", "equality", "rebellion", "revolt", 
+  "resistance", "reform", "change", "rights", "revolution", "independence", "self-determination", "emancipation", 
   "insurrection", "defiance", "overthrow", "abolition", "protest", "civil disobedience", "struggle", "leader", 
   "ruler", "dictator", "emperor", "king", "laws", "policy", "imperial", "authority", "tyranny", "command", 
   "sovereignty", "government", "control", "dominion", "oppression", "governance", "rule", "regime", "bureaucracy", 
-  "empowerment", "subjugation", "lobbying", "diplomacy", "propaganda", "election", "campaign", "coup d'état", 
+  "empowerment", "subjugation", "lobbying", "diplomacy", "propaganda", "election", "suffrage", "campaign", "coup d'état", 
   "senate", "congress", "assembly", "council", "municipality", "legislation", "judiciary", "executive", "citizenship", 
   "patriotism", "nationalism", "separatism", "militarism", "civil service", "public policy", "social contract", 
   "taxation", "welfare state", "judicial review", "checks and balances", "centralism", "localism", "unionism", 
-  "populism", "elitism", "meritocracy", "paternalism", "imperialism", "colonialism", "international law", 
+  "populism", "elitism", "meritocracy", "paternalism", "imperialism", "colonialism", "human rights", "international law", 
   "geopolitics", "statecraft", "sanctions", "treaties", "alliances", "nonviolence", "peacekeeping", "national security", 
   "surveillance", "policing", "martial law", "emergency powers", "partisanship", "ideology", "sectarianism", "polarization", 
-  "libertarianism", "progressivism", "traditionalism", "radicalism", "integration", "decentralization", "privatization", "politics,"
+  "libertarianism", "progressivism", "traditionalism", "radicalism", "integration", "decentralization", "privatization"
 ];
 
-let socialmovement = [
-   "feminism", "civil rights", "abolitionism", "suffrage", "human rights", "liberation", 
-  "equality", "socialism", "communism", "freedom", "emancipation", "reform", "justice", "liberty", "christianity", "islam", "judaism", "buddhism", "hinduism", "atheism", "faith", 
-  "ritual", "mythology", "spirituality", "paganism", "belief", "doctrine", "heresy", "islamic",
-  "pilgrimage", "sacred"
-
+let social_and_cultural_ideologies = [
+  "peasants", "aristocracy", "working class", "bourgeoisie", "lords", "proletariat", "servants", "elite", "slaves", 
+  "serfdom", "capitalist", "landowner", "tenant", "guild", "nobility", "gentry", "baron", "duke", "vassal", 
+  "feudal lord", "estate", "indentured servant", "bourgeois", "plebeian", "african", "asian", "european", 
+  "native american", "hispanic", "racism", "civilization", "savage", "barbarism", "ethnic", "tribal", 
+  "multicultural", "segregation", "race", "colonial", "indigenous", "cultural superiority", "racial purity", 
+  "ethnicity", "diaspora", "creole", "mestizo", "racialized", "inferiority", "nationalism", "exclusion", 
+  "christianity", "islam", "judaism", "buddhism", "hinduism", "paganism", "atheism", "deism", "god", "church", 
+  "priest", "monk", "prophet", "holy", "sacred", "temple", "missionary", "ritual", "ceremony", "pilgrimage", 
+  "faith", "belief", "heresy", "doctrine", "orthodoxy", "salvation", "hell", "devotion", "martyrdom", 
+  "caste", "clan", "family", "lineage", "ancestry", "hierarchy", "tradition", "patriarchy", "matriarchy", 
+  "kinship", "solidarity", "community", "collectivism", "individualism", "identity", "stereotype", "discrimination", 
+  "prejudice", "xenophobia", "assimilation", "acculturation", "ethnocentrism", "cultural relativism", 
+  "social stratification", "cultural appropriation", "mythology", "folklore", "superstition", "legend", 
+  "totemism", "animism", "shamanism", "ancestor worship", "polytheism", "monotheism", "syncretism", 
+  "agnosticism", "spirituality", "witchcraft", "alchemy", "mysticism", "sorcery", "astrology", 
+  "enlightenment", "philosophy", "idealism", "materialism", "realism", "nihilism", "existentialism", 
+  "humanism", "transcendentalism", "romanticism", "secularism", "fundamentalism", "moral relativism", 
+  "social contract", "moral code", "virtue ethics", "utilitarianism", "aesthetics", "ethics", "values", 
+  "rites of passage", "social customs", "taboo", "manners", "hospitality", "social norms", "public opinion"
 ];
 
 let gender = [
-  "women", "men", "masculinity", "femininity", "patriarchy", "motherhood", "fatherhood",
-  "matriarchy", "gender roles", "gender identity", "womanhood", "manhood", "toxic masculinity", 
-  "misogyny", "subordination", "sexuality", "gender norms", "gender binary", "non-binary", 
-  "gender fluid", "transgender", "cisgender", "genderqueer", "intersex", "gender expression", 
+  "women", "men", "masculinity", "femininity", "patriarchy", "motherhood", "fatherhood", "equality", "feminism", 
+  "matriarchy", "gender roles", "gender identity", "suffrage", "oppression", "womanhood", "manhood", "toxic masculinity", 
+  "misogyny", "male dominance", "subordination", "sexuality", "gender norms", "gender binary", "non-binary", 
+  "gender fluid", "transgender", "cisgender", "genderqueer", "intersex", "two-spirit", "gender expression", 
   "gender dysphoria", "sexual orientation", "queer", "gender non-conforming", "gender parity", "agender", "demiboy", 
   "demigirl", "androgyne", "third gender", "gender transition", "transfeminine", "transmasculine", "gender abolition", 
-  "gender spectrum","gender variance", "misandry", "gender affirmation", "gender euphoria", 
+  "gender spectrum", "intersectionality", "gender variance", "misandry", "gender affirmation", "gender euphoria", 
   "gender fluidity", "pangender", "bigender", "gender performance", "hegemonic masculinity", "intersectional feminism", 
   "sexual dimorphism", "gender-affirming care", "neutrois", "sissy", "butch", "femme", "androcentrism", "sexism", 
-  "gender pay gap", "glass ceiling", "gender segregation", "body positivity", "self-identification", "allyship",
+  "gender pay gap", "glass ceiling", "gender segregation", "body positivity", "self-identification", "allyship", 
   "gender policing", "empowerment", "self-expression", "transmisogyny", "nonconforming", "gender inclusivity", 
   "feminist movement", "equal rights", "gender sensitivity", "social construct", "masculine-of-center", "feminine-of-center", 
   "gender fluidity", "queer theory", "masculine pride", "feminine pride", "machismo", "androgyny", "sexual autonomy", 
   "feminine mystique", "male privilege", "female empowerment", "LGBTQIA+", "socialization", "male gaze", 
-  "heteronormativity", "gender equality", "gender stereotypes", "cisnormativity", "gender power dynamics", "inclusive language",
-  "gender", "feminine", "masculine", "equality", "patriarchy", "matriarchy", 
-  "suffrage", "womanhood", "manhood", "cisgender", "transgender", "non-binary", 
-  "intersectionality", "misogyny", "man", "woman", "men", "women"
+  "heteronormativity", "gender equality", "gender stereotypes", "cisnormativity", "gender power dynamics", "inclusive language"
 ];
 
-
-// Historical Eras and Events
-let historicalErasAndEvents = [
-  "colonial", "revolution", "independence", "industrial", "civil war", "world war", "renaissance", 
-  "enlightenment", "modernity", "discovery", "invasion", "treaty", "abolition", "slavery", "emancipation", "history"
-];
-
-
-
-// Political Systems and Governance
-let politicalSystemsAndGovernance = [
-  "democracy", "monarchy", "republic", "dictatorship", "empire", "sovereignty", 
-  "colonialism", "federalism", "parliament", "republicanism", "tyranny", "policy", "governance", "law"
-];
-
-// Social Structure and Class
-let socialStructureAndClass = [
-  "aristocracy", "bourgeoisie", "working class", "elite", "servitude", "peasants", "landowners", 
-  "gentry", "indentured", "proletariat", "slavery", "serfdom", "capitalist", "tenant"
-];
-
-// Gender and Identity
-let genderAndIdentity = [
-  "gender", "feminine", "masculine", "equality", "patriarchy", "matriarchy", 
-  "suffrage", "womanhood", "manhood", "feminism", "cisgender", "transgender", "non-binary", 
-  "intersectionality", "misogyny", "man", "woman", "men", "women"
-];
-
-// Race, Ethnicity, and Culture
-let raceEthnicityAndCulture = [
-  "race", "ethnicity", "racism", "segregation", "diaspora", "colonial", "native", 
-  "indigenous", "multicultural", "superiority", "inferiority", "exclusion", "diversity", 
-  "heritage", "identity"
-];
-
-// Religion and Belief Systems
-let religionAndBeliefSystems = [
-  "christianity", "islam", "judaism", "buddhism", "hinduism", "atheism", "faith", 
-  "ritual", "mythology", "spirituality", "paganism", "belief", "doctrine", "heresy", 
-  "pilgrimage", "sacred"
-];
-
-// Economic Systems and Labor
-let economicSystemsAndLabor = [
-  "capitalism", "labor", "trade", "commerce", "industry", "markets", "economy", 
-  "monopoly", "investment", "inequality", "wealth", "poverty", "industrialization", 
-  "merchant", "globalization"
-];
-
-// Science and Innovation
-let scienceAndInnovation = [
-  "science", "technology", "innovation", "discovery", "exploration", "progress", 
-  "invention", "experiment", "medicine", "physics", "biology", "chemistry", "astronomy", "natural history",
-  "genetics", "neuroscience", "robotics", "artificial intelligence", "nanotechnology", "quantum mechanics",
-  "biotechnology", "ecology", "environmental science", "geology", "meteorology", "oceanography", "paleontology",
-  "space exploration", "engineering", "computer science", "data science", "machine learning", "cybersecurity",
-  "renewable energy", "climate change", "sustainability", "biochemistry", "molecular biology", "astrophysics",
-  "cognitive science", "materials science", "pharmacology", "bioinformatics", "theoretical physics", "astrobiology", "space"
-];
-
-// War and Conflict
-let warAndConflict = [
-  "war", "battle", "conflict", "military", "revolution", "uprising", "rebellion", 
-  "resistance", "occupation", "treaty", "peace", "violence", "aggression", "soldiers", "victory"
-];
-
-// Cultural Expressions and Art
-let culturalExpressionsAndArt = [
-  "art", "literature", "music", "painting", "sculpture", "poetry", "drama", 
-  "aesthetic", "artist", "exhibition", "craft", "folk", "design", "expression", "avant-garde"
+let abolitionism = [
+  "abolition", "freedom", "emancipation", "anti-slavery", "slave trade", "underground railroad", "manumission", 
+  "liberation", "abolitionist", "human rights", "civil rights", "abolitionist movement", "free soil", "antislavery society", 
+  "freedom seekers", "fugitive slave", "emancipation proclamation", "13th amendment", "slave rebellion", "freedom papers", 
+  "moral suasion", "radical abolition", "gradual emancipation", "immediate emancipation", "equal rights", "slave narrative", 
+  "suffrage", "oppression", "resistance", "freedom fighters", "human dignity", "equal protection", "reparations", 
+  "abolitionist literature", "slave auction", "plantation", "bondage", "servitude", "antislavery press", 
+  "liberty", "justice", "William Lloyd Garrison", "Frederick Douglass", "Harriet Tubman", "Sojourner Truth", 
+  "John Brown", "Quakers", "abolitionist speeches", "liberty laws", "freedom trail", "abolitionist pamphlet", 
+  "black codes", "slave codes", "free black community", "abolitionist newspaper", "underground network", 
+  "freedom suits", "abolitionist societies", "racial equality", "humanitarianism", "American Anti-Slavery Society", 
+  "abolitionist conventions", "freedom songs", "abolitionist petitions", "freedom of movement", "abolitionist press", 
+  "equal justice", "Amistad case", "slave revolt", "manumitted", "emancipator", "bonded labor", "racial justice", 
+  "abolitionist publications", "liberty party", "moral obligation", "freedom fund", "civil disobedience", "slave emancipation", 
+  "economic freedom", "colonization movement", "abolitionist campaigns", "abolitionist literature", "black abolitionists", 
+  "abolitionist allies", "slave narratives", "anti-bondage", "slave liberation", "liberty bell", "abolitionist gatherings"
 ];
 
 
@@ -134,7 +107,7 @@ async function fetchData(url) {
       throw new Error(`Network response was not ok (status ${response.status})`);
     }
     const data = await response.json(myJson);   
-    return data.slice(0, 10000);
+    return data.slice(0, 25000);
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error; 
@@ -154,13 +127,11 @@ function hideLoading() {
 
 showLoading();
 
-const scienceColor = "rgb(249, 88, 105)";
+const historyColor = "rgb(249, 88, 105)";
 const politicColor = "rgb(45, 84, 174)";
 const genderColor = "rgb(45, 103, 88)";
 const socialColor = "rgb(208, 138, 105)";
 const invisitageColor = "rgb(255, 255, 255)";
-const his_events_color = "rgb(101, 64, 112)";
-const warColor = "rgb(94, 103, 97)";
 
 
 const dataPromise = fetchData(myJson)
@@ -183,11 +154,14 @@ const dataPromise = fetchData(myJson)
   let subContainer = document.createElement('div');
   subContainer.className = 'sub-container x1';
 
+
+  
   // Loop through data and return only the name property
   const names = data.map(item => item.name);
   const type = data.map(item => item.objectType);
   console.log("–––––––>> Thos are Names:",  names);
   console.log("type:",  type);
+
   
   names.forEach((name, index) => {
     const div = document.createElement('div');
@@ -211,12 +185,15 @@ const dataPromise = fetchData(myJson)
 
     tokens.forEach(token => { 
       const span = document.createElement('span');
-      
-      if (politics.some(w => token.toLowerCase() === w.toLowerCase())) {
+      if (historical_context.some(w => token.toLowerCase() === w.toLowerCase())) {
+        span.textContent = token;
+        span.style.background = `${historyColor}`;
+        span.classList.add('historical');
+      } else if (politics.some(w => token.toLowerCase() === w.toLowerCase())) {
         span.textContent = token;
         span.style.background = `${politicColor}`;
         span.classList.add('political');
-      } else if (socialmovement.some(w => token.toLowerCase() === w.toLowerCase())) {
+      } else if (social_and_cultural_ideologies.some(w => token.toLowerCase() === w.toLowerCase())) {
         span.textContent = token;
         span.style.background = `${socialColor}`;
         span.classList.add('social');
@@ -224,24 +201,7 @@ const dataPromise = fetchData(myJson)
         span.textContent = token;
         span.style.background = `${genderColor}`;
         span.classList.add('gender');
-      } 
-       else if (historicalErasAndEvents.some(w => token.toLowerCase() === w.toLowerCase())) {
-        span.textContent = token;
-        span.style.background = `${his_events_color}`;
-        span.classList.add('historicalEvent');
-      } 
-      else if (scienceAndInnovation.some(w => token.toLowerCase()===w.toLowerCase())){
-        span.textContent = token;
-        span.style.background = `${scienceColor}`;
-        span.classList.add('science');
-      }
-      else if (warAndConflict.some(w => token.toLowerCase() === w.toLowerCase())){
-        span.textContent = token;
-        span.style.backgroundColor = `${warColor}`;
-        span.classList.add('war');
-      }
-      
-      else {
+      } else {
         span.textContent = token;
         span.classList.add('notHighlight');
       }
@@ -262,17 +222,11 @@ const dataPromise = fetchData(myJson)
             titel_div.style.backgroundColor = socialColor;
           } else if (className === 'gender') {
             titel_div.style.backgroundColor = genderColor;
-          } else if (className === 'historicalEvent'){
-            titel_div.style.backgroundColor = his_events_color;
-          } else if (className === 'science'){
-            titel_div.style.backgroundColor = scienceColor;
-          } else if (className === 'war'){
-            titel_div.style.backgroundColor = warColor;
           }
         });
         const menu_div = document.querySelector('.menu-left');
         menu_div.appendChild(titel_div);
-        console.log('HI you! Your are hovering on a sub-container');
+        console.log('HI you iiiiiii');
       });
 
       div.addEventListener('mouseout', () => {
@@ -281,8 +235,13 @@ const dataPromise = fetchData(myJson)
           titel_div.remove();
         }
       });
+
+    
     });
+
   }); 
+
+
 
     function createButton(category, color, className) {
         const button = document.createElement('button');
@@ -358,26 +317,26 @@ const dataPromise = fetchData(myJson)
         subButtonContainer.node().appendChild(createIvisitageBtn('Invisitage', `${invisitageColor}`, 'notHighlight'));
         buttonContainer.node().appendChild(createButton('Politics', `${politicColor}`, 'political'));
         buttonContainer.node().appendChild(createButton('Gender', `${genderColor}`, 'gender'));
-        buttonContainer.node().appendChild(createButton('Social Movement', `${socialColor}`, 'social'));
-        buttonContainer.node().appendChild(createButton('Historical Events', `${his_events_color}`, 'historicalEvent'));
-        buttonContainer.node().appendChild(createButton('Science and Innovation', `${scienceColor}`, 'science'));
-        buttonContainer.node().appendChild(createButton('War and Conflict', `${warColor}`, 'war'));
+        buttonContainer.node().appendChild(createButton('Social', `${socialColor}`, 'social'));
+        buttonContainer.node().appendChild(createButton('Historical', `${historyColor}`, 'historical'));
       } else {
         console.error('Element with ID "butnContainer" not found.');
       }
 
+      
+  let historicalCount = 0;
   let politicalCount = 0;
   let socialCount = 0;
   let genderCount = 0;
-  let historicalErasAndEventsCount = 0;
-  let scienceCount = 0;
-  let warCount = 0;
 
   function countWords(data) {
     data.forEach(item => {
       const tokens = item.name.toLowerCase().split(' ');
       tokens.forEach(token => {
-        if (socialmovement.some(w => token.toLowerCase() === w.toLowerCase())) {
+        if (historical_context.some(w => token.toLowerCase() === w.toLowerCase())) {
+          historicalCount++;
+        }
+        if (social_and_cultural_ideologies.some(w => token.toLowerCase() === w.toLowerCase())) {
           socialCount++;
         }
         if (politics.some(w => token.toLowerCase() === w.toLowerCase())) {
@@ -385,18 +344,11 @@ const dataPromise = fetchData(myJson)
         }
         if (gender.some(w => token.toLowerCase() === w.toLowerCase())) {
           genderCount++;
-        } 
-        if (historicalErasAndEvents.some(w => token.toLowerCase() === w.toLowerCase())){
-          historicalErasAndEventsCount++
-        } 
-        if(scienceAndInnovation.some(w => token.toLowerCase() === w.toLowerCase())){
-          scienceCount++;
-        } 
-        if (warAndConflict.some( W => token.toLowerCase() === W.toLowerCase())){
-          warCount++;
         }
       });
     });
+
+    
   
     //secondary visualization div structure
     const secVizContainer = app.append('div').attr('class','sec-viz-container')
@@ -404,14 +356,12 @@ const dataPromise = fetchData(myJson)
     secVizContainer.node().appendChild(chartContainer.node());
 
     // Bar for each group
-    const totalCount = politicalCount + socialCount + genderCount + historicalErasAndEventsCount + scienceCount + warCount;
-    
+    const totalCount = historicalCount + politicalCount + socialCount + genderCount;
+    const historicalWidth = (historicalCount / totalCount) * 100;
     const politicalWidth = (politicalCount / totalCount) * 100;
     const socialWidth = (socialCount / totalCount) * 100;
     const genderWidth = (genderCount / totalCount) * 100;
-    const historicalErasAndEventsWidth = (historicalErasAndEventsCount / totalCount) *100;
-    const scienceWidth = (scienceCount/totalCount) * 100;
-    const warWidth = (warCount / totalCount)*100;
+
     const barPadding = "0.5em"
     
     const stackedBar = chartContainer.append('div')
@@ -432,31 +382,17 @@ const dataPromise = fetchData(myJson)
       .style('padding', `${barPadding}`);
 
       
-    stackedBar.append('div')
+      stackedBar.append('div')
       .attr('class', 'rect-social')
       .style('width', `${socialWidth}%`)
       .style('background-color', `${socialColor}`)
       .style('padding', `${barPadding}`); 
-
-
-    stackedBar.append('div')
-      .attr('class', 'rect-historicalEvent')
-      .style('width', `${historicalErasAndEventsWidth}%`)
-      .style('background-color', `${his_events_color}`)
-      .style('padding', `${barPadding}`)
       
-    stackedBar.append('div')
-      .attr('class', 'rect-science')
-      .style('width', `${scienceWidth}%`)
-      .style('background-color', `${scienceColor}`)
-      .style('padding', `${barPadding}`)
-
-    stackedBar.append('div')
-      .attr('class', 'rect-war')
-      .style('width', `${warWidth}%`)
-      .style('background-color', `${warColor}`)
-      .style('padding', `${barPadding}`)
-
+      stackedBar.append('div')
+        .attr('class', 'rect-historical')
+        .style('width', `${historicalWidth}%`)
+        .style('background-color', `${historyColor}`)
+        .style('padding', `${barPadding}`)
     const textStackedBar = chartContainer.append('div')
       .attr('class', 'stacked-bar')
       .style('display', 'flex')
@@ -478,30 +414,20 @@ const dataPromise = fetchData(myJson)
       .attr('class', 'rect-social')
       .style('width', `${socialWidth}%`)
       .style('padding', `${barPadding}`)
-      .text(`Soical Movement: ${socialCount}`);
-    
-
+      .text(`Soical: ${socialCount}`);
+ 
     textStackedBar.append('div')
       .attr('class', 'rect-historical')
-      .style('width', `${historicalErasAndEventsWidth}%`)
+      .style('width', `${historicalWidth}%`)
       .style('padding', `${barPadding}`)
-      .text(`History: ${historicalErasAndEventsCount}`);
-    
-    textStackedBar.append('div')
-      .attr('class', 'rect-historical')
-      .style('width', `${scienceWidth}%`)
-      .style('padding', `${barPadding}`)
-      .text(`Science and Innovation: ${scienceCount}`);
-
-    textStackedBar.append('div')
-      .attr('class', 'rect-war')
-      .style('width', `${warWidth}%`)
-      .style('padding', `${barPadding}`)
-      .text(`War and Conflict: ${warCount}`);
+      .text(`History: ${historicalCount}`);
     }
 
   countWords(data);
 
+ 
+
+  // Append the last sub-container if it has any children
   if (subContainer.children.length > 0) {
     fragment.appendChild(subContainer);
   }
