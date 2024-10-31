@@ -4,7 +4,7 @@
 body {
   margin: 0;
   background: #000;
-  color:white;
+  color: white;
 }
 
 .loading{
@@ -35,13 +35,21 @@ body {
   justify-content: space-between;
   width: auto;
   font-family:"DM Sans", sans-serif;
+}
 
+.header{
+  padding-right: 20px;
+  color: rgb(163, 163, 163);
 }
 
 .menu-left{
   display: flex;
   align-items: center;
   align-self: stretch;
+  width: 100%;
+}
+.menu-book-title{
+  width: 100%;
 }
 
 .menu-right{
@@ -132,6 +140,7 @@ body {
   justify-content: space-between;
   cursor:crosshair;
   flex-direction: column;
+  color: white;
   
 }
 
@@ -164,9 +173,6 @@ body {
   justify-content: space-around
 }
 
-
-
-
 button{
   font-family: "Space Mono", "DM Sans", sans-serif;
   font-size: 0.6em;
@@ -191,8 +197,10 @@ button :hover{
 
 .popUpDiv{
   display: flex;
-  padding-left: 10px;
+  padding-left: 4px;
+  padding-right: 4px;
   height: auto;
   width: auto;
-  font-size: .8em;
+  font-size: 0.9em;
 }
+

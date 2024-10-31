@@ -70,13 +70,11 @@ function hideLoading() {
 
 showLoading();
 
-const historyColor = "rgb(80, 255, 168)";
-const politicColor = "rgb(111, 154, 255)";
-const genderColor = "rgb(187, 255, 97)";
-const socialColor = "rgb(247, 192, 96)";
+const historyColor = "rgb(249, 88, 105)";
+const politicColor = "rgb(45, 84, 174)";
+const genderColor = "rgb(45, 103, 88)";
+const socialColor = "rgb(208, 138, 105)";
 const invisitageColor = "rgb(255, 255, 255)";
-
-
 
 
 const dataPromise = fetchData(myJson)
@@ -115,22 +113,6 @@ const dataPromise = fetchData(myJson)
     div.style.fontSize = '0.5em';
     div.style.padding = "0.4em"
 
-      div.addEventListener('mouseover', () => {
-        const titel_div = document.createElement('div');
-        titel_div.className = 'popUpDiv';
-        titel_div.textContent = name;
-        const menu_div = document.querySelector('.menu-left');
-        menu_div.append(titel_div);
-        console.log('HI you iiiiiii');
-      });
-
-      div.addEventListener('mouseout', () => {
-        const titel_div = document.querySelector('.popUpDiv');
-        if (titel_div) {
-          titel_div.remove();
-        }
-      });
-
     let lowerCaseName = name.toLowerCase();
     let tokens = lowerCaseName.split(' ');
     console.log('this is my tokens', tokens);
@@ -168,6 +150,36 @@ const dataPromise = fetchData(myJson)
       }
       div.appendChild(span);
       div.appendChild(document.createTextNode(' '));
+
+      div.addEventListener('mouseover', () => {
+        const titel_div = document.createElement('div');
+        titel_div.className = 'popUpDiv';
+        titel_div.textContent = `    ${span.textContent.toLocaleUpperCase()}`;
+        span.classList.forEach(className => {
+          titel_div.classList.add(className);
+          if (className === 'historical') {
+            titel_div.style.backgroundColor = historyColor;
+          } else if (className === 'political') {
+            titel_div.style.backgroundColor = politicColor;
+          } else if (className === 'social') {
+            titel_div.style.backgroundColor = socialColor;
+          } else if (className === 'gender') {
+            titel_div.style.backgroundColor = genderColor;
+          }
+        });
+        const menu_div = document.querySelector('.menu-left');
+        menu_div.appendChild(titel_div);
+        console.log('HI you iiiiiii');
+      });
+
+      div.addEventListener('mouseout', () => {
+        const titel_div = document.querySelector('.popUpDiv');
+        if (titel_div) {
+          titel_div.remove();
+        }
+      });
+
+    
     });
 
   }); 
@@ -181,6 +193,7 @@ const dataPromise = fetchData(myJson)
         button.style.padding = '0.5em 2.5em 0.5em 2.5em';
         button.style.borderRadius = '1em'
         button.style.border = `0.1em solid ${color}`
+        button.style.color = 'white'
 
         button.onmouseover = () => {
           button.style.backgroundColor = 'black';
@@ -190,7 +203,7 @@ const dataPromise = fetchData(myJson)
         };
         button.onmouseout = () => {
           button.style.backgroundColor = color;
-          button.style.color = 'black';
+          button.style.color = 'white';
           button.style.border = `0.1em solid ${color}`
         };
       
@@ -277,6 +290,8 @@ const dataPromise = fetchData(myJson)
         }
       });
     });
+
+    
   
     //secondary visualization div structure
     const secVizContainer = app.append('div').attr('class','sec-viz-container')
@@ -296,48 +311,35 @@ const dataPromise = fetchData(myJson)
       .attr('class', 'stacked-bar')
       .style('display', 'flex')
       .style('width', '100%');
-  
-    stackedBar.append('div')
-      .attr('class', 'rect-gender')
-      .style('width', `${genderWidth}%`)
-      .style('background-color', `${genderColor}`)
-      .style('padding', `${barPadding}`);
-
-    stackedBar.append('div')
-      .attr('class', 'rect-historical')
-      .style('width', `${historicalWidth}%`)
-      .style('background-color', `${historyColor}`)
-      .style('padding', `${barPadding}`)
-    
+      
     stackedBar.append('div')
       .attr('class', 'rect-political')
       .style('width', `${politicalWidth}%`)
       .style('background-color', `${politicColor}`)
       .style('padding', `${barPadding}`);
 
-
     stackedBar.append('div')
+      .attr('class', 'rect-gender')
+      .style('width', `${genderWidth}%`)
+      .style('background-color', `${genderColor}`)
+      .style('padding', `${barPadding}`);
+
+      
+      stackedBar.append('div')
       .attr('class', 'rect-social')
       .style('width', `${socialWidth}%`)
       .style('background-color', `${socialColor}`)
       .style('padding', `${barPadding}`); 
-
+      
+      stackedBar.append('div')
+        .attr('class', 'rect-historical')
+        .style('width', `${historicalWidth}%`)
+        .style('background-color', `${historyColor}`)
+        .style('padding', `${barPadding}`)
     const textStackedBar = chartContainer.append('div')
       .attr('class', 'stacked-bar')
       .style('display', 'flex')
       .style('width', '100%');
-
-    textStackedBar.append('div')
-      .attr('class', 'rect-gender')
-      .style('width', `${genderWidth}%`)
-      .style('padding', `${barPadding}`)
-      .text(`Gender: ${genderCount}`);
-
-    textStackedBar.append('div')
-      .attr('class', 'rect-historical')
-      .style('width', `${historicalWidth}%`)
-      .style('padding', `${barPadding}`)
-      .text(`History: ${historicalCount}`);
 
     textStackedBar.append('div')
       .attr('class', 'rect-political')
@@ -346,11 +348,23 @@ const dataPromise = fetchData(myJson)
       .text(`Potitics: ${politicalCount}`);
 
     textStackedBar.append('div')
+      .attr('class', 'rect-gender')
+      .style('width', `${genderWidth}%`)
+      .style('padding', `${barPadding}`)
+      .text(`Gender: ${genderCount}`);
+      
+    textStackedBar.append('div')
       .attr('class', 'rect-social')
       .style('width', `${socialWidth}%`)
       .style('padding', `${barPadding}`)
       .text(`Soical: ${socialCount}`);
-  }
+ 
+    textStackedBar.append('div')
+      .attr('class', 'rect-historical')
+      .style('width', `${historicalWidth}%`)
+      .style('padding', `${barPadding}`)
+      .text(`History: ${historicalCount}`);
+    }
 
   countWords(data);
 
