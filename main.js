@@ -359,7 +359,7 @@ const dataPromise = fetchData(myJson)
         buttonContainer.node().appendChild(createButton('Politics', `${politicColor}`, 'political'));
         buttonContainer.node().appendChild(createButton('Gender', `${genderColor}`, 'gender'));
         buttonContainer.node().appendChild(createButton('Social Movement', `${socialColor}`, 'social'));
-        buttonContainer.node().appendChild(createButton('Historical Events', `${his_events_color}`, 'historicalEvent'));
+        buttonContainer.node().appendChild(createButton('Historiy', `${his_events_color}`, 'historicalEvent'));
         buttonContainer.node().appendChild(createButton('Science and Innovation', `${scienceColor}`, 'science'));
         buttonContainer.node().appendChild(createButton('War and Conflict', `${warColor}`, 'war'));
       } else {
