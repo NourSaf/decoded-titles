@@ -24,7 +24,7 @@ let politics = [
 ];
 
 let socialmovement = [
-   "feminism", "civil rights", "abolitionism", "suffrage", "human rights", "liberation", 
+  "feminism", "civil rights", "abolitionism", "suffrage", "human rights", "liberation", 
   "equality", "socialism", "communism", "freedom", "emancipation", "reform", "justice", "liberty", "christianity", "islam", "judaism", "buddhism", "hinduism", "atheism", "faith", 
   "ritual", "mythology", "spirituality", "paganism", "belief", "doctrine", "heresy", "islamic",
   "pilgrimage", "sacred"
